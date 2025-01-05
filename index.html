@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+  <link rel="icon" type="image/png" sizes="128x128" href="./favicon/icons8-bmi-128.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+    body {
+      font-family: "Poppins", serif;
+    }
+
+    .gauge-container {
+      width: 250px;
+      height: 125px;
+      position: relative;
+      margin: 0 auto;
+      background: #d7cfcf;
+      border-radius: 125px 125px 0 0;
+      overflow: hidden;
+      border-top: 36px solid rgb(21, 214, 21); 
+      border-left: 39px solid #0051ffe2;
+      border-right: 39px solid rgb(236, 26, 26); 
+    }
+
+
+
+    #head {
+      animation-name: leMagnify;
+      animation-duration: 2s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes leMagnify {
+      from {
+        transform: scale(3, 3);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(.5, .5)
+      }
+    }
+
+/* 
+    #height , #weight{
+  animation-name: leFadeInRight;
+  animation-duration: 2s; 
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+} */
+
+
+    @keyframes leFadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+        /* Returns the element to its original position */
+      }
+    }
+
+
+
+    .needle {
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      width: 6px;
+      height: 76px;
+      background: #1f2937;
+      transform-origin: bottom center;
+      transform: translateX(-50%) rotate(-90deg);
+      /* Start at the left side */
+      border-radius: 3px;
+      transition: all 1s ;
+    }
+
+    .gauge-label {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+      color: #374151;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center  md:h-screen mt-14 md:mt-0">
+  <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md ml-1 mr-1"  id="main">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6" id="head">BMI Calculator</h1>
+
+    <form id="bmiForm" class="space-y-4">
+      <div>
+        <label for="height" class="block text-gray-600 font-medium"> Height (cm)</label>
+        <input type="number" id="height"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          placeholder="Enter your height" required>
+      </div>
+      <div>
+        <label for="weight" class="block text-gray-600 font-medium"> Weight (kg)</label>
+        <input type="number" id="weight"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          placeholder="Enter your weight" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">
+        Calculate BMI
+      </button>
+    </form>
+
+    <div class="mt-7">
+      <div class="gauge-container">
+        <div id="needle" class="needle flex justify-center items-center ">
+          <div class="h-4 w-4 bg-green-600 absolute bottom-[-10px]  rounded-[50%]"></div>
+        </div>
+      
+      </div>
+      <div id="status" class="text-center mt-4 text-lg font-semibold text-gray-800">Status: --</div>
+      <div class="flex justify-center font-mono font-medium" id="out">BMI: 0.0</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
